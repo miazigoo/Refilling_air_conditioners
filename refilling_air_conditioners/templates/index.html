@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заправка и ремонт кондиционеров</title>
+    <link rel="icon" href="{% static 'img/favicon_io/192x192.png' %}" sizes="180x180" type="image/x-icon">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <style>
+        .hero {
+            background-image: url({% static 'img/serv_hero1.jpeg' %});
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            height: 400px;
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="https://rudalle-coordinator.sberdevices.ru/static/93/55/e2/9355e2d0d44d4fb2af50e3946b390e09_res_00000_image.jpg" alt="Логотип" width="50" height="50" class="d-inline-block align-text-top">
+            <h1>Заправка и ремонт кондиционеров</h1>
+        </div>
+        <div class="menu">
+            <a href="#hero">Услуги</a>
+            <a href="#contact">Контакты</a>
+        </div>
+    </header>
+    <section class="hero" id="hero">
+        <h1>Заправка и ремонт кондиционеров</h1>
+        <p>ЦЕНА ФИКСИРОВАНА В ПРОЦЕССЕ ЗАПРАВКИ НЕ УВЕЛИЧИВАЕТСЯ. Выезд в пределах КАД +450руб.</p>
+    </section>
+    <section class="services">
+        {% for service in services %}
+        <div class="service">
+            <h2>{{ service.title }}</h2>
+            <p>{{ service.description }}</p>
+        </div>
+        {% endfor %}
+    </section>
+    <section class="pricing">
+        {% for service in services %}
+            {% if service.prices.all %}
+            <h2>Цены на услугу "{{ service.title }}"</h2>
+            <table class="pricing-table">
+                <tr>
+                    <th>{{ service.service_name }}</th>
+                    <th>Цена</th>
+                </tr>
+                {% for entry in service.prices.all %}
+                <tr>
+                    <td>{{ entry.weight_range }}</td>
+                    <td>{{ entry.price }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+        {% endfor %}
+    </section>
+    <div>
+        <p>
+
+        </p>
+    </div>
+    <footer class="text-center">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 id="contact">Контакты</h2>
+                    <p>Телефон: {{ contact_info.phone }}</p>
+                    <p>Электронная почта: {{ contact_info.email }}</p>
+                    <p>Адрес: {{ contact_info.address }}</p>
+                </div>
+            </div>
+            <p>© 2023 Заправка и ремонт кондиционеров</p>
+        </div>
+    </footer>
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
