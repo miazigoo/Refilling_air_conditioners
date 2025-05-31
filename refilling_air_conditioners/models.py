@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+
 class Service(models.Model):
     title = models.CharField(_('Название'), max_length=255)
     description = models.TextField(_('Описание'))
@@ -31,6 +32,7 @@ class PricingTableEntry(models.Model):
         verbose_name = _('Строки прайс-листа')
         verbose_name_plural = _('Таблицы цен')
 
+
 class ContactInfo(models.Model):
     phone = models.CharField(_('Телефон'), max_length=20)
     email = models.EmailField(_('E-mail'))
@@ -42,3 +44,14 @@ class ContactInfo(models.Model):
     class Meta:
         verbose_name = _('Контактная информация')
         verbose_name_plural = _('Контактные данные')
+
+
+class CarouselImg(models.Model):
+    image = models.ImageField(
+        'картинка',
+        upload_to="carousel/"
+    )
+
+    class Meta:
+        verbose_name = _('Фото для карусели')
+        verbose_name_plural = _('Фото для карусели')
